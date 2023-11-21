@@ -1,44 +1,23 @@
+import { useState } from "react";
 import { CORE_CONCEPTS } from "./data";
-function Header() {
-  return (
-    <header>
-      <img src="src/assets/react-core-concepts.png" alt="Stylized atom" />
-      <h1>React Essentials</h1>
-      <p>
-        Fundamental React concepts you will need for almost any app you are
-        going to build!
-      </p>
-    </header>
-  );
-}
-
-function CoreConcepts({ image, description, title }) {
-  return (
-    <li>
-      <img src={image} alt={description}></img>
-      <h3>{title}</h3>
-      <p>{description}</p>
-    </li>
-  );
-}
-/*OR
-function CoreConcepts(props) {
-  return (
-    <li>
-      <img src={props.image} alt={props.description}></img>
-      <h3>{props.title}</h3>
-      <p>{props.description}</p>
-    </li>
-  );
-}*/
+import Header from "./components/Header";
+import CoreConcepts from "./components/CoreConcept";
+import TabButton from "./components/TabButton";
 
 function App() {
+  let [selectedTopic, setSelectedTopic] = useState("Click a button");
+
+  function clickHandler(selectedButton) {
+    setSelectedTopic(selectedButton);
+    //console.log(selectedTopic);
+  }
+
   return (
     <div>
       <Header></Header>
       <main>
         <section id="core-concepts">
-          <h2>Core Concepts !!</h2>
+          <h2>Core Concepts</h2>
           <ul>
             <CoreConcepts
               title={CORE_CONCEPTS[0].title}
@@ -49,6 +28,19 @@ function App() {
             <CoreConcepts {...CORE_CONCEPTS[2]} />
             <CoreConcepts {...CORE_CONCEPTS[3]} />
           </ul>
+        </section>
+
+        <section id="examples">
+          <h2>Examples</h2>
+          <menu>
+            <TabButton onClick={() => clickHandler("components")}>
+              Components
+            </TabButton>
+            <TabButton onClick={() => clickHandler("jsx")}>JSX</TabButton>
+            <TabButton onClick={() => clickHandler("props")}>Props</TabButton>
+            <TabButton onClick={() => clickHandler("state")}>State</TabButton>
+          </menu>
+          {selectedTopic}
         </section>
       </main>
     </div>
