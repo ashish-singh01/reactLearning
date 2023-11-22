@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import { CORE_CONCEPTS, EXAMPLES } from "./data";
 import Header from "./components/Header";
 import CoreConcepts from "./components/CoreConcept";
@@ -13,7 +13,10 @@ function App() {
   }
 
   return (
-    <div>
+     <> 
+      {/* Empty tag is used to wrap the whole ouput as one so that JS can return */}
+      {/* Instead we can use <div></div> but it will show in DOM as an element. 
+     Alternately <Fragment> </Fragment> can be used which doesnt show on DOM */}
       <Header></Header>
       <main>
         <section id="core-concepts">
@@ -21,7 +24,8 @@ function App() {
           <ul>
             {CORE_CONCEPTS.map((items) => (
               <CoreConcepts {...items} />
-            ))} {/* This will take each items from the array and map it into a seprate array to display*/}
+            ))}{" "}
+            {/* This will take each items from the array and map it into a seprate array to display*/}
             {/* Below method breaks if the number of items in the CORE_CONCEPTS array changes
                 We have to manually update each time we change the number of items in the array. */}
             {/* <CoreConcepts
@@ -76,7 +80,7 @@ function App() {
           )}
         </section>
       </main>
-    </div>
+    </>
   );
 }
 
